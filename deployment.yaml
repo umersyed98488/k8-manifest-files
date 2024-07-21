@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: register-app
-          image: vedantdevops/loginregisterapp:1.0.32
+          image: syedumer17/loginregisterapp
           resources:
             limits:
               memory: "256Mi"
