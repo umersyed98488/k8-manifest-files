@@ -12,7 +12,7 @@ pipeline {
         }
         stage("Checkout from SCM") {
                steps {
-                   git changelog: false, poll: false, url: 'https://github.com/vedantguptha/k8-manifest-files.git'
+                   git changelog: false, poll: false, url: 'https://github.com/umersyed98488/k8-manifest-files.git'
                }
         }
 
@@ -34,8 +34,8 @@ pipeline {
         stage("Commit Changes") {
             steps {
                 sh """
-                   git config --global user.name "vedantguptha"
-                   git config --global user.email "vedantguptha.devops@gmail.com"
+                   git config --global user.name "umersyed98488"
+                   git config --global user.email "syedumer98488@gmail.com"
                    git add deployment.yaml
                    git commit -m "Updated Deployment Manifest"
                 """
@@ -43,8 +43,8 @@ pipeline {
         }
         stage("Push") {
             steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'git-hub-push-id', gitToolName: 'git-tool')]) {
-                    sh "git push https://github.com/vedantguptha/k8-manifest-files.git master"
+                withCredentials([gitUsernamePassword(credentialsId: 'git-hub-id', gitToolName: 'git-tool')]) {
+                    sh "git push https://github.com/umersyed98488/k8-manifest-files.git master"
                 }
             }
         }
