@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: register-app
-          image: syedumer17/loginregisterapp
+          image: syedumer17:1.0
           resources:
             limits:
               memory: "256Mi"
