@@ -43,7 +43,7 @@ pipeline {
         }
         stage("Push") {
             steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'git-hub-id', gitToolName: 'git-tool')]) {
+                withCredentials([gitUsernamePassword(credentialsId: '8', gitToolName: 'git-tool')]) {
                     sh "git push https://github.com/umersyed98488/k8-manifest-files.git master"
                 }
             }
