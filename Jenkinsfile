@@ -31,6 +31,16 @@ pipeline {
                 sh " cat deployment.yaml " 
             }
         }
+        stage ("commit changes") {
+            steps {
+                sh """
+                    git config --global user.name "umersyed98488"
+                    git config --global user.email "syedumer8087@gmail.com"
+                    git add deployment.yaml
+                    git commit -m "updated Deployment Mainfest"
+                """
+            }
+        }
         stage("Push") {
             steps {
                 withCredentials([gitUsernamePassword(credentialsId: '8', gitToolName: 'git-tool')]) {
