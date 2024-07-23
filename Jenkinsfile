@@ -27,17 +27,16 @@ pipeline {
             steps {
                 sh "cat deployment.yaml"
             }
-        }stage("Commit Changes") {
-    steps {
-        sh '''
-           git config --global user.name "umersyed98488"
-           git config --global user.email "syedumer8087@gmail.com"
-           git add deployment.yaml
-           git commit -m "Updated Deployment Manifest"
-        '''
-    }
-}
-
-        
+        }
+        stage("Commit Changes") {
+            steps {
+                sh '''
+                   git config --global user.name "umersyed98488"
+                   git config --global user.email "syedumer8087@gmail.com"
+                   git add deployment.yaml
+                   git commit -m "Updated Deployment Manifest"
+                '''
+            }
+        }
     }
 }
