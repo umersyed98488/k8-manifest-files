@@ -31,27 +31,6 @@ pipeline {
                 sh " cat deployment.yaml " 
             }
         }
-        stage("Commit Changes") {
-            steps {
-                script {
-                    echo "Configuring Git user..."
-                    sh 'git config --global user.name "umersyed98488"'
-                    sh 'git config --global user.email "syedumer8087@gmail.com"'
-
-                    echo "Adding changes to Git staging area..."
-                    sh 'git add deployment.yaml'
-
-                    echo "Committing changes..."
-                try {
-                    sh 'git commit -m "Updated Deployment Manifest"'
-                } catch (Exception e) {
-                    echo "Failed to commit changes: ${e.message}"
-                    currentBuild.result = 'FAILURE' // Mark build as failed explicitly
-                    error "Failed to commit changes"
-                }
-            }
-        }
-    }
         stage("Push") {
             steps {
                 withCredentials([gitUsernamePassword(credentialsId: '8', gitToolName: 'git-tool')]) {
