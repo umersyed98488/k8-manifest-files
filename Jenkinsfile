@@ -1,10 +1,9 @@
-
 pipeline {
     agent any
     parameters {
-    string(name: 'docker_image_name')
-    string(name: 'release_version_tag_id' )
-  }
+        string(name: 'docker_image_name')
+        string(name: 'release_version_tag_id')
+    }
     stages {
         stage("Cleanup Workspace") {
             steps {
@@ -12,34 +11,31 @@ pipeline {
             }
         }
         stage("Checkout from SCM") {
-               steps {
-                   git changelog: false, poll: false, url: 'https://github.com/umersyed98488/k8-manifest-files.git'
-               }
+            steps {
+                git changelog: false, poll: false, url: 'https://github.com/umersyed98488/k8-manifest-files.git'
+            }
         }
-
         stage("Update the Deployment Tags") {
             steps {
-                sh """
+                sh '''
                    cat deployment.yaml
-                   sed -i 's/${params.docker_image_name}.*/${params.docker_image_name}:${params.release_version_tag_id}/g' deployment.yaml
-                """
+                   sed -i 's|${params.docker_image_name}.*|${params.docker_image_name}:${params.release_version_tag_id}|g' deployment.yaml
+                '''
             }
         }
-
-         stage("New Deploymnet File") {
+        stage("New Deployment File") {
             steps {
-                sh " cat deployment.yaml " 
+                sh "cat deployment.yaml"
             }
         }
-
         stage("Commit Changes") {
             steps {
-                sh """
+                sh '''
                    git config --global user.name "umersyed98488"
                    git config --global user.email "syedumer8087@gmail.com"
                    git add deployment.yaml
                    git commit -m "Updated Deployment Manifest"
-                """
+                '''
             }
         }
         stage("Push") {
